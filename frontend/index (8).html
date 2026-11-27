@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+ content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only dark">
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json?v=9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>J.A.R.V.I.S</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+ href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700">
+<link rel="stylesheet" href="style.css?v=7"
+ onerror="this.onerror=null;this.href='Style.css?v=7'">
+</head>
+<body>
+<div id="errbar" style="display:none;position:fixed;top:0;left:0;
+right:0;z-index:99;background:#a00;color:#fff;padding:8px;
+font:12px monospace"></div>
+<script>
+var jvErr = '';
+function jvBar(t) {
+  var b = document.getElementById('errbar');
+  if (!b) return;
+  b.style.display = 'block';
+  b.textContent = t;
+}
+window.addEventListener('error', function (e) {
+  if (e.target && e.target !== window) return;
+  jvErr = (e.message || '') + (e.lineno ? ' (line ' + e.lineno + ')' : '');
+  jvBar('ERROR: ' + jvErr);
+});
+setTimeout(function () {
+  if (!window.JV_OK) {
+    jvBar('J.A.R.V.I.S did not start. ' + (jvErr ||
+      'script.js is missing or has the wrong name.'));
+  }
+}, 3000);
+</script>
+<header><h1>J.A.R.V.I.S</h1><p>MOBILE EDITION</p></header>
+
+<div class="core" id="core">
+  <div class="ring r1"></div>
+  <div class="ring r2"></div>
+  <div class="center"></div>
+</div>
+<p class="core-text" id="coreText">CORE ACTIVE</p>
+
+<div class="status">
+  <h2>SYSTEM STATUS</h2>
+  <div class="row"><span>AI CORE</span>
+    <b id="stAI" class="off">○ NO KEY</b></div>
+  <div class="row"><span>NETWORK</span>
+    <b id="stNet" class="on">● ONLINE</b></div>
+  <div class="row"><span>VOICE</span>
+    <b id="stVoice" class="off">○ OFF</b></div>
+  <div class="row"><span>MEMORY</span>
+    <b id="stMem" class="on">● 0 SAVED</b></div>
+</div>
+
+<div class="tools">
+  <button id="keyBtn" class="ghost">API KEY</button>
+  <button id="voiceBtn" class="ghost">VOICE: OFF</button>
+  <button id="langBtn" class="ghost">MIC: EN</button>
+  <button id="memBtn" class="ghost">MEM</button>
+  <button id="clearBtn" class="ghost">CLEAR</button>
+  <button id="wake-btn" class="ghost">WAKE: OFF</button>
+</div>
+
+<div class="mem" id="memPanel" hidden>
+  <div class="tabs">
+    <button id="tabFacts" class="ghost tab-on">FACTS</button>
+    <button id="tabChats" class="ghost">CHATS</button>
+  </div>
+  <div id="factsBox">
+    <div class="mem-head">
+      <b>LONG MEMORY</b>
+      <button id="memWipe" class="ghost">WIPE ALL</button>
+    </div>
+    <div id="memList"></div>
+  </div>
+  <div id="chatsBox" hidden>
+    <input id="chatSearch" placeholder="Search chats..."
+      autocomplete="off">
+    <div id="chatList"></div>
+  </div>
+</div>
+
+<div class="chat" id="chat"></div>
+
+<div class="input-area">
+  <input id="msg" placeholder="Ask J.A.R.V.I.S..."
+    autocomplete="off">
+  <button id="cam" class="ghost">📷</button>
+  <button id="mic" class="ghost">🎤</button>
+  <button id="send">SEND</button>
+</div>
+
+<input type="file" id="file" accept="image/*"
+  capture="environment" hidden>
+
+<script src="script.js?v=7"
+ onerror="var s=document.createElement('script');
+ s.src='Script.js?v=7';document.body.appendChild(s)"></script>
+</body>
+</html>
